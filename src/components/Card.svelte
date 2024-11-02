@@ -13,7 +13,7 @@
 	}
 </script>
 
-<div class="p-8 flex">
+<button class="p-8 flex" on:click={handleClick}>
 	<div class="card btn flex flex-col">
 		<!-- 数字を表示するバッジ -->
 		<div class="number-badge select-none">{number}</div>
@@ -22,7 +22,7 @@
 		<div class="card-title select-none">{title}</div>
 		<div class="select-none">{content}</div>
 	</div>
-</div>
+</button>
 
 <style>
 	.card {

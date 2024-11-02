@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 
 export const countdown = writable(3);
 export const gameStarted = writable(false);
+export const timeUp = writable(false);
 export const timeLeft = writable(30); // 制限時間（秒）
 
 export function startCountdown(onCompletedCountdown: () => void) {
@@ -20,13 +21,15 @@ export function startCountdown(onCompletedCountdown: () => void) {
 	}, 1000);
 }
 
-export function startTimer() {
+export function startTimer(onFinished: () => void) {
 	const interval = setInterval(() => {
 		timeLeft.update((t) => {
 			if (t > 0) {
 				return t - 0.1;
 			} else {
 				clearInterval(interval);
+				timeUp.set(true);
+				onFinished();
 				return 0;
 			}
 		});

@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="flex flex-col items-center justify-center min-h-screen bg-surface-100">
+<div class="flex flex-col items-center justify-center min-h-screen">
 	<div class="title-container">
 		<strong class="text-3xl font-bold uppercase text-primary">ゲームのタイトル</strong>
 	</div>
@@ -57,7 +57,7 @@
 	}
 
 	.confirmation-box {
-		background-color: #fff;
+		background-color: #0f0f0f;
 		padding: 2rem;
 		border-radius: 8px;
 		text-align: center;
