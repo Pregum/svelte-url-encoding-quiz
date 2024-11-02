@@ -33,6 +33,14 @@
 			<p><code class="code">/src/routes/+layout.svelte</code></p>
 			<p><code class="code">/src/routes/+page.svelte</code></p>
 		</div>
+		<div class="flex justify-center space-x-2">
+			<a
+				class="btn variant-filled"
+				href="/title"
+			>
+				Go to Title
+			</a>
+		</div>
 	</div>
 </div>
 
