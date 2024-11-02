@@ -2,9 +2,12 @@
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import Card from './../../components/Card.svelte';
+	import CardContainer from '../../components/CardContainer.svelte';
 
 	let countdown = writable(3);
-	let gameStarted = writable(false);
+	// let gameStarted = writable(false);
+	let gameStarted = writable(true); // TODO: デバッグよう、後で消す
 
 	onMount(() => {
 		const interval = setInterval(() => {
@@ -27,15 +30,15 @@
 	let timeLeft = 30; // 制限時間（秒）
 	let timer: NodeJS.Timeout;
 
-    onMount(() => {
-        // 1秒ごとに残り時間を減らす
-        timer = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft -= 0.1; // 0.1秒ごとに減らす
-            } else {
-                clearInterval(timer); // 時間切れでタイマーを停止
-            }
-        }, 100);
+	onMount(() => {
+		// 1秒ごとに残り時間を減らす
+		timer = setInterval(() => {
+			if (timeLeft > 0) {
+				timeLeft -= 0.1; // 0.1秒ごとに減らす
+			} else {
+				clearInterval(timer); // 時間切れでタイマーを停止
+			}
+		}, 100);
 	});
 
 	// クリーンアップ
@@ -44,11 +47,16 @@
 
 {#if $gameStarted}
 	<ProgressBar value={timeLeft} max={30} />
-	<div class="cards">
-		{#each Array(6) as _, i}
-			<div class="card">{i + 1}</div>
-		{/each}
+	<div class="cards flex flex-wrap justify-center m-20">
+		<!-- <Card> -->
+		<CardContainer>
+			{#each Array(6) as _, i}
+				<!-- <div class="card">{i + 1}</div> -->
+				<Card title={(i + 1).toString()} number={i + 1} content="This is a card content." />
+			{/each}
+		</CardContainer>
 	</div>
+	<!-- </Card> -->
 
 	<div class="timer">{timeLeft}秒</div>
 {:else}
@@ -56,13 +64,13 @@
 {/if}
 
 <style>
-	.cards {
+	/* .cards {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 		margin-top: 20px;
-	}
-	.card {
+	} */
+	/* .card {
 		width: 100px;
 		height: 150px;
 		background-color: #f0f0f0;
@@ -72,7 +80,7 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 24px;
-	}
+	} */
 	.timer {
 		position: absolute;
 		top: 10px;
