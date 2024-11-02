@@ -12,7 +12,7 @@
 
 		<!-- カードの内容 -->
 		<div class="card-title select-none">{title}</div>
-		<div class='select-none'>{content}</div>
+		<div class="select-none">{content}</div>
 	</div>
 </div>
 
@@ -21,6 +21,7 @@
 		position: relative;
 		padding: 1rem;
 		/* background-color: #fff; */
+		width: 12rem;
 		border: 1px solid #19f386;
 		border-radius: 8px;
 		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);

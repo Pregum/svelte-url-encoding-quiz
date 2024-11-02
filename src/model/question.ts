@@ -1,8 +1,8 @@
-import { AnswerOption } from './AnswerOption.ts';
+import { AnswerOption } from './answerOption.ts';
 
 export class Question {
 	constructor(
-		public id: number,
+		public id: string,
 		public question: string,
 		public options: AnswerOption[],
 	) {}

@@ -8,18 +8,25 @@
 	} from '../../model/gameLogic';
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 	import Card from './../../components/Card.svelte';
 	import CardContainer from '../../components/CardContainer.svelte';
+	import { QuestionGenerator } from '../../model/questionGenerator';
+	import { AnswerOption } from '../../model/AnswerOption';
+	import type { Question } from '../../model/question';
+
+	const encodedCharacters = ' !"#$%&\'()*+,/:;<=>?@[\\]^`{|}';
+	const generator = new QuestionGenerator(encodedCharacters);
+	let question: Question | undefined;
 
 	onMount(() => {
 		startCountdown(() => {
 			startTimer();
+			question = generator.generateOptions();
 		});
 	});
 	// 表示する問題の内容
 	let questionTitle = '%デコード後の文字を回答してください';
-	let question = '%5B';
+	$: answerOptions = question?.options;
 </script>
 
 <div class="grid gap-4">
@@ -34,8 +41,8 @@
 
 		<div class="flex items-center justify-center m-20">
 			<CardContainer>
-				{#each Array(6) as _, i}
-					<Card title={(i + 1).toString()} number={i + 1} content="This is a card content." />
+				{#each answerOptions ?? [] as option, i}
+					<Card title={option.text} number={i + 1} content="" />
 				{/each}
 			</CardContainer>
 		</div>

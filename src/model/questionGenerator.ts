@@ -1,10 +1,11 @@
-import { AnswerOption } from './AnswerOption.ts';
-import { percentEncode, splitIntoChunks } from './encodingLogic.ts';
+import { AnswerOption } from './answerOption.ts';
+import { percentEncode } from './encodingLogic.ts';
 import { Question } from './question.ts';
 
+import { v4 as uuidv4 } from 'uuid';
 export class QuestionGenerator {
 	constructor(
-		public originalQuestionSeeds: string[] // この問題の元となる文字列
+		public originalQuestionSeeds: string // この問題の元となる文字列
 	) {}
 
 	/**
@@ -13,24 +14,23 @@ export class QuestionGenerator {
 	 */
 	generateOptions(): Question {
 		// originalQuestionSeedsからランダムに1つ選ぶ
-		const seed =
-			this.originalQuestionSeeds[Math.floor(Math.random() * this.originalQuestionSeeds.length)];
 
-		// 選ばれたseedをパーセントエンコーディングし、6文字ごとのチャンクに分割
-		const encodedString = percentEncode(seed);
-		const chunks = splitIntoChunks(encodedString, 6);
-
-		// 選択肢として6つのチャンクを使用
 		const options: AnswerOption[] = [];
 		for (let i = 0; i < 6; i++) {
-			options.push(new AnswerOption(i, chunks[i] || '', false));
+			const seed =
+				this.originalQuestionSeeds[Math.floor(Math.random() * this.originalQuestionSeeds.length)];
+			const encodedString = percentEncode(seed);
+			options.push(new AnswerOption(i, encodedString, false));
 		}
 
 		// ランダムに1つの選択肢を正解としてマーク
 		const correctIndex = Math.floor(Math.random() * options.length);
 		options[correctIndex].isCorrect = true;
 
-		const question = new Question(0, options[correctIndex].text, options);
+		const uuid = uuidv4();
+		console.log('uuid:', uuid);
+
+		const question = new Question(uuid, options[correctIndex].text, options);
 
 		return question;
 	}
