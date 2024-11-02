@@ -43,7 +43,7 @@
 		});
 	});
 	// 表示する問題の内容
-	let questionTitle = '%デコード後の文字を回答してください';
+	let questionTitle = '%デコード後の文字を選択してください';
 	$: answerOptions = question?.options;
 	let correctCount = writable(0);
 	let incorrectCount = writable(0);
