@@ -36,13 +36,13 @@
 		<!-- 問題表示エリア -->
 		<div class="question-area mb-8 flex-col flex">
 			<p class="text-3xl">{questionTitle}</p>
-			<p class="text-8xl my-8">{question}</p>
+			<p class="text-8xl my-8">{question?.question ?? ''}</p>
 		</div>
 
 		<div class="flex items-center justify-center m-20">
 			<CardContainer>
 				{#each answerOptions ?? [] as option, i}
-					<Card title={option.text} number={i + 1} content="" />
+					<Card title={option.answer} number={i + 1} content="" />
 				{/each}
 			</CardContainer>
 		</div>

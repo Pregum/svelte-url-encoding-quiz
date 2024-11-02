@@ -20,7 +20,7 @@ export class QuestionGenerator {
 			const seed =
 				this.originalQuestionSeeds[Math.floor(Math.random() * this.originalQuestionSeeds.length)];
 			const encodedString = percentEncode(seed);
-			options.push(new AnswerOption(i, encodedString, false));
+			options.push(new AnswerOption(i, seed, encodedString, false));
 		}
 
 		// ランダムに1つの選択肢を正解としてマーク
@@ -30,7 +30,7 @@ export class QuestionGenerator {
 		const uuid = uuidv4();
 		console.log('uuid:', uuid);
 
-		const question = new Question(uuid, options[correctIndex].text, options);
+		const question = new Question(uuid, options[correctIndex].rawAnswer, options);
 
 		return question;
 	}
