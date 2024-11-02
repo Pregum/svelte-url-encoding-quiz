@@ -1,5 +1,5 @@
 <!-- TitleScreen.svelte -->
-<script lang="ts">
+<script lang='ts'>
 	import { fly } from 'svelte/transition';
 	import { goto } from '$app/navigation';
 
