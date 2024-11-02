@@ -1,8 +1,16 @@
 <!-- components/Card.svelte -->
-<script>
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let title = 'Default Title';
 	export let content = 'This is a card content.';
 	export let number = 1; // 数字を表示するためのプロパティ
+	const dispatch = createEventDispatcher();
+
+	// クリックイベントを発火する関数
+	function handleClick() {
+		dispatch('click', { title });
+	}
 </script>
 
 <div class="p-8 flex">

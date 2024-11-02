@@ -27,6 +27,11 @@
 	// 表示する問題の内容
 	let questionTitle = '%デコード後の文字を回答してください';
 	$: answerOptions = question?.options;
+
+	function handleOnClick(option: AnswerOption): void {
+		option.isCorrect ? console.log('正解') : console.log('不正解');
+		question = generator.generateOptions();
+	}
 </script>
 
 <div class="grid gap-4">
@@ -42,7 +47,12 @@
 		<div class="flex items-center justify-center m-20">
 			<CardContainer>
 				{#each answerOptions ?? [] as option, i}
-					<Card title={option.answer} number={i + 1} content="" />
+					<Card
+						on:click={() => handleOnClick(option)}
+						title={option.answer}
+						number={i + 1}
+						content=""
+					/>
 				{/each}
 			</CardContainer>
 		</div>
