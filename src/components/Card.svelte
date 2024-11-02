@@ -5,14 +5,14 @@
 	export let number = 1; // 数字を表示するためのプロパティ
 </script>
 
-<div class="p-8 flex m-8">
+<div class="p-8 flex">
 	<div class="card btn flex flex-col">
 		<!-- 数字を表示するバッジ -->
 		<div class="number-badge">{number}</div>
 
 		<!-- カードの内容 -->
-		<div class="card-title">{title}</div>
-		<div>{content}</div>
+		<div class="card-title select-none">{title}</div>
+		<div class='select-none'>{content}</div>
 	</div>
 </div>
 
@@ -21,7 +21,7 @@
 		position: relative;
 		padding: 1rem;
 		/* background-color: #fff; */
-		/* border: 1px solid #ddd; */
+		border: 1px solid #19f386;
 		border-radius: 8px;
 		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 		text-align: center;

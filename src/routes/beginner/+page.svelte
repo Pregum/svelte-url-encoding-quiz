@@ -45,42 +45,24 @@
 	$: if (timeLeft === 0) clearInterval(timer);
 </script>
 
-{#if $gameStarted}
-	<ProgressBar value={timeLeft} max={30} />
-	<div class="cards flex flex-wrap justify-center m-20">
-		<!-- <Card> -->
-		<CardContainer>
-			{#each Array(6) as _, i}
-				<!-- <div class="card">{i + 1}</div> -->
-				<Card title={(i + 1).toString()} number={i + 1} content="This is a card content." />
-			{/each}
-		</CardContainer>
-	</div>
-	<!-- </Card> -->
+<div class="grid grid-cols-3 gap-4">
+	{#if $gameStarted}
+		<ProgressBar value={timeLeft} max={30} class="flex flex-auto" />
+		<div class="flex items-center justify-center m-20">
+			<CardContainer>
+				{#each Array(6) as _, i}
+					<Card title={(i + 1).toString()} number={i + 1} content="This is a card content." />
+				{/each}
+			</CardContainer>
+		</div>
 
-	<div class="timer">{timeLeft}秒</div>
-{:else}
-	<p>カウントダウン: {$countdown}</p>
-{/if}
+		<div class="timer">{timeLeft}秒</div>
+	{:else}
+		<p>カウントダウン: {$countdown}</p>
+	{/if}
+</div>
 
 <style>
-	/* .cards {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		margin-top: 20px;
-	} */
-	/* .card {
-		width: 100px;
-		height: 150px;
-		background-color: #f0f0f0;
-		border: 1px solid #ccc;
-		margin: 10px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 24px;
-	} */
 	.timer {
 		position: absolute;
 		top: 10px;
