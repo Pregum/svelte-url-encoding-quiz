@@ -1,53 +1,37 @@
 <script lang="ts">
+	import {
+		startCountdown,
+		startTimer,
+		countdown,
+		gameStarted,
+		timeLeft
+	} from '../../model/gameLogic';
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Card from './../../components/Card.svelte';
 	import CardContainer from '../../components/CardContainer.svelte';
 
-	let countdown = writable(3);
-	// let gameStarted = writable(false);
-	let gameStarted = writable(true); // TODO: デバッグよう、後で消す
-
 	onMount(() => {
-		const interval = setInterval(() => {
-			countdown.update((n) => {
-				if (n > 1) {
-					return n - 1;
-				} else {
-					clearInterval(interval);
-					// gameStarted.set(true);
-					setTimeout(() => {
-						gameStarted.set(true);
-					}, 1000);
-					return 0;
-				}
-			});
-		}, 1000);
+		startCountdown(() => {
+			startTimer();
+		});
 	});
-
-	// タイマー
-	let timeLeft = 30; // 制限時間（秒）
-	let timer: NodeJS.Timeout;
-
-	onMount(() => {
-		// 1秒ごとに残り時間を減らす
-		timer = setInterval(() => {
-			if (timeLeft > 0) {
-				timeLeft -= 0.1; // 0.1秒ごとに減らす
-			} else {
-				clearInterval(timer); // 時間切れでタイマーを停止
-			}
-		}, 100);
-	});
-
-	// クリーンアップ
-	$: if (timeLeft === 0) clearInterval(timer);
+	// 表示する問題の内容
+	let questionTitle = '%デコード後の文字を回答してください';
+	let question = '%5B';
 </script>
 
-<div class="grid grid-cols-3 gap-4">
+<div class="grid gap-4">
 	{#if $gameStarted}
-		<ProgressBar value={timeLeft} max={30} class="flex flex-auto" />
+		<ProgressBar value={$timeLeft} max={30} class="flex flex-auto" />
+
+		<!-- 問題表示エリア -->
+		<div class="question-area mb-8 flex-col flex">
+			<p class="text-3xl">{questionTitle}</p>
+			<p class="text-8xl my-8">{question}</p>
+		</div>
+
 		<div class="flex items-center justify-center m-20">
 			<CardContainer>
 				{#each Array(6) as _, i}
@@ -72,5 +56,15 @@
 		padding: 5px 10px;
 		border-radius: 4px;
 		font-size: 1rem;
+	}
+	.question-area {
+		background-color: #f0f0f0;
+		padding: 1rem;
+		border-radius: 8px;
+		text-align: center;
+		font-size: 1.2rem;
+		font-weight: bold;
+		color: #333;
+		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 	}
 </style>
