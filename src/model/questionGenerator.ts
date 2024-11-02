@@ -1,9 +1,9 @@
 import { AnswerOption } from './AnswerOption.ts';
 import { percentEncode, splitIntoChunks } from './encodingLogic.ts';
+import { Question } from './question.ts';
 
 export class QuestionGenerator {
 	constructor(
-		public question: string,
 		public originalQuestionSeeds: string[] // この問題の元となる文字列
 	) {}
 
@@ -11,7 +11,7 @@ export class QuestionGenerator {
 	 * 6つの選択肢を生成し、ランダムに1つを正解としてマークするメソッド
 	 * @returns AnswerOptionの配列
 	 */
-	generateOptions(): AnswerOption[] {
+	generateOptions(): Question {
 		// originalQuestionSeedsからランダムに1つ選ぶ
 		const seed =
 			this.originalQuestionSeeds[Math.floor(Math.random() * this.originalQuestionSeeds.length)];
@@ -30,6 +30,8 @@ export class QuestionGenerator {
 		const correctIndex = Math.floor(Math.random() * options.length);
 		options[correctIndex].isCorrect = true;
 
-		return options;
+		const question = new Question(0, options[correctIndex].text, options);
+
+		return question;
 	}
 }

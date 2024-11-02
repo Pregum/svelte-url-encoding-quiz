@@ -5,6 +5,5 @@ export class Question {
 		public id: number,
 		public question: string,
 		public options: AnswerOption[],
-		public correctOption: number
 	) {}
 }
