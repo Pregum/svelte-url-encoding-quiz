@@ -1,6 +1,5 @@
-// src/utils/gameLogic.ts
-
 import { writable } from 'svelte/store';
+// import { setInterval } from 'node:timers';
 
 export const countdown = writable(3);
 export const gameStarted = writable(false);

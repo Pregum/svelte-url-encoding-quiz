@@ -8,7 +8,7 @@
 <div class="p-8 flex">
 	<div class="card btn flex flex-col">
 		<!-- 数字を表示するバッジ -->
-		<div class="number-badge">{number}</div>
+		<div class="number-badge select-none">{number}</div>
 
 		<!-- カードの内容 -->
 		<div class="card-title select-none">{title}</div>
