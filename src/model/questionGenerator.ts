@@ -16,11 +16,19 @@ export class QuestionGenerator {
 		// originalQuestionSeedsからランダムに1つ選ぶ
 
 		const options: AnswerOption[] = [];
-		for (let i = 0; i < 6; i++) {
-			const seed =
-				this.originalQuestionSeeds[Math.floor(Math.random() * this.originalQuestionSeeds.length)];
-			const encodedString = percentEncode(seed);
-			options.push(new AnswerOption(i, seed, encodedString, false));
+		const usedIndices = new Set<number>();
+
+		while (options.length < 6) {
+			const randomIndex = Math.floor(Math.random() * this.originalQuestionSeeds.length);
+			if (!usedIndices.has(randomIndex)) {
+				usedIndices.add(randomIndex);
+				const seed = this.originalQuestionSeeds[randomIndex];
+				// const encodedString = encodeURIComponent(seed);
+				// percentEncode ではエンコードされない文字をエンコードする
+				const customEncodedString = this.customEncodeURIComponent(seed);
+
+				options.push(new AnswerOption(options.length, seed, customEncodedString, false));
+			}
 		}
 
 		// ランダムに1つの選択肢を正解としてマーク
@@ -33,5 +41,17 @@ export class QuestionGenerator {
 		const question = new Question(uuid, options[correctIndex].rawAnswer, options);
 
 		return question;
+	}
+
+	/**
+	 * 指定した文字列をパーセントエンコーディングする関数
+	 * @param str - エンコードする文字列
+	 * @returns
+	 */
+	customEncodeURIComponent(str: string): string {
+		return encodeURIComponent(str).replace(
+			/[!'()*]/g,
+			(char) => '%' + char.charCodeAt(0).toString(16).toUpperCase()
+		);
 	}
 }
