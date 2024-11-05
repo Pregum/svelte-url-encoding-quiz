@@ -7,12 +7,12 @@
 		timeLeft,
 		timeUp
 	} from '../../model/gameLogic';
+	import { AnswerOption } from '../../model/answerOption';
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import Card from './../../components/Card.svelte';
 	import CardContainer from '../../components/CardContainer.svelte';
 	import { QuestionGenerator } from '../../model/questionGenerator';
-	import { AnswerOption } from '../../model/AnswerOption';
 	import type { Question } from '../../model/question';
 	import { ResultManager } from '../../model/resultManager';
 	import { writable } from 'svelte/store';
@@ -157,19 +157,6 @@
 		right: 20px;
 		padding: 1rem;
 		background-color: #4caf50;
-		color: #fff;
-		border-radius: 4px;
-		font-weight: bold;
-		text-align: center;
-		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-		z-index: 1000; /* 他の要素より前面に表示 */
-	}
-	.in-correct-message {
-		position: absolute;
-		top: 20px;
-		right: 20px;
-		padding: 1rem;
-		background-color: #ed6b6b;
 		color: #fff;
 		border-radius: 4px;
 		font-weight: bold;

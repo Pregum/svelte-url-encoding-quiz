@@ -1,4 +1,4 @@
-import { AnswerOption } from './answerOption.ts';
+import { AnswerOption } from './answerOption';
 
 export class Question {
 	constructor(
